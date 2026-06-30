@@ -107,20 +107,6 @@ function nextSong() {
     playSong();
 }
 
-function updateProgress() {
-    const barWidth = (song.currentTime / song.duration) * 100;
-    currentProgress.style.setProperty("--progress", `${barWidth}%`);
-    songTime.innerText = toHHMMSS(song.currentTime);
-
-}
-
-function jumpTo(event) {
-    const width = progressContainer.clientWidth;
-    const clickPosition = event.offsetX;
-    const jumpToTime = (clickPosition / width) * song.duration;
-    song.currentTime = jumpToTime;
-}
-
 function shuffleArray(preShuffleArray) {
     let size = preShuffleArray.length;
     let currentIndex = size - 1;
@@ -164,6 +150,19 @@ function nextOrRepeat() {
     else {
         playSong();
     }
+}
+
+function jumpTo(event) {
+    const width = progressContainer.clientWidth;
+    const clickPosition = event.offsetX;
+    const jumpToTime = (clickPosition / width) * song.duration;
+    song.currentTime = jumpToTime;
+}
+
+function updateProgress() {
+    const barWidth = (song.currentTime / song.duration) * 100;
+    currentProgress.style.setProperty("--progress", `${barWidth}%`);
+    songTime.innerText = toMMSS(song.currentTime);
 }
 
 function toMMSS(originalNumber){
